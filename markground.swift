@@ -193,11 +193,9 @@ func main() {
 
         var chapters = [Chapter]()
 
-        if chapters.count > 0 {
+        if delegate.pages.count > 0 {
             // Convert every found chapter to markdown if the playground uses chapters
             let pagesFolder = url.URLByAppendingPathComponent("Pages")
-
-            var chapters = [Chapter]()
 
             delegate.pages.forEach({ (page) in
 
