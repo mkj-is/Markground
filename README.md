@@ -14,10 +14,11 @@ You basically just need to type this in the Terminal:
 
 * `--help` or `-h` — Open the help.
 * `--no-toc` or `-t` — Disable the Table of Contents generation (it is generated only for playground with pages).
+* `--no-headings` or `-n` — Disable headings for paged playgrounds.
 * `-o <path>` — Path to the output file, it will be rewritten. If not set then the result will be printed to the Terminal or stdout.
 
 This is the example with all arguments:
 
 ```
-./markground.swift --no-toc -o README.md MyPlayground.playground
+./markground.swift --no-toc --no-headings -o README.md MyPlayground.playground
 ```

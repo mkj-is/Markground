@@ -146,6 +146,17 @@ func main() {
         help()
     }
 
+    // Headings settings
+    var headings = true
+    if let index = arguments.indexOf("-n") {
+        arguments.removeAtIndex(index)
+        headings = false
+    }
+    if let index = arguments.indexOf("--no-headings") {
+        arguments.removeAtIndex(index)
+        headings = false
+    }
+
     // Table of contents settings
     var tableOfContents = true
     if let index = arguments.indexOf("-t") {
@@ -225,7 +236,9 @@ func main() {
         
         // Add table of contents if selected
         if tableOfContents {
-            markdown.appendContentsOf("\n\n## Table of contents\n\n")
+            if headings {
+                markdown.appendContentsOf("\n\n## Table of contents\n\n")
+            }
             chapters.forEach({ (chapter) in
                 markdown.appendContentsOf("* [" + chapter.title + "](#" + chapter.title.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "-") + ")\n")
             })
@@ -234,7 +247,7 @@ func main() {
         
         // Add the chapter texts
         chapters.forEach({ (chapter) in
-            if chapter.title != "" {
+            if headings && chapter.title != "" {
                 markdown.appendContentsOf("\n\n## " + chapter.title + "\n\n")
             }
             markdown.appendContentsOf(chapter.body)
@@ -259,7 +272,8 @@ func main() {
 func help() {
 
     print("usage: ./markground.swift [--help | -h] [--no-toc | -t]")
-    print("                          [-o <path>] <playground>")
+    print("                          [-o <path>] [--no-headings | -n]")
+    print("                          <playground>")
 
     exit(0)
 }
